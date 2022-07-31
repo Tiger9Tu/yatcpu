@@ -122,6 +122,10 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: yatcpu
+      - name: Generate Verilog
+        run: cd yatcpu && sbt "runMain board.verilator.VerilogGenerator"
+      - name: Compile Verilated model
+        run: cd yatcpu/verilog/verilator && verilator --exe --cc --trace Top.v sim_main.cpp && make -C obj_dir -f VTop.mk
       - name: Setup ToolChain
         run: sudo apt install -y verilator binutils-riscv64-unknown-elf gcc-riscv64-unknown-elf
       - name: Setup RISCOF
