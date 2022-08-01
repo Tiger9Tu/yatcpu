@@ -128,7 +128,7 @@ jobs:
           ../configure --prefix=/usr/bin
           make -j4
           sudo make install
-          cp spike /usr/bin
+          sudo cp spike /usr/bin
       - name: Setup test suite
         run: riscof --verbose info arch-test --clone
       - name: Run RISCOF compliance test
